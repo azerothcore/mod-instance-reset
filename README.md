@@ -1,5 +1,6 @@
-# mod-instance-reset
-
+# ![logo](https://raw.githubusercontent.com/azerothcore/azerothcore.github.io/master/images/logo-github.png) AzerothCore
+## mod-instance-reset
+- Latest build status with azerothcore: [![Build Status](https://github.com/azerothcore/mod-instance-reset/workflows/core-build/badge.svg?branch=master&event=push)](https://github.com/azerothcore/mod-instance-reset)
 
 ## Description
 
