@@ -57,7 +57,7 @@ public:
                         ++itr;
                 }
             }
-            creature->MonsterWhisper("Your instances have been reset." , player);
+            creature->Whisper("Your instances have been reset.", LANG_UNIVERSAL, player);
             CloseGossipMenuFor(player);
         }
         return true;
