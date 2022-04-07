@@ -54,7 +54,6 @@ public:
                 {
                     message = "This server is running the |cff4CFF00Instance Reset |rmodule.";
                     break;
-
                 }
                 case LOCALE_esES:
                 case LOCALE_esMX:
@@ -66,8 +65,9 @@ public:
                 {
                     message = "Этот сервер использует модуль |cff4CFF00Перезапуск подземелий|r.";
                     break;
-
                 }
+                case TOTAL_LOCALES:
+                    break;
             }
             ChatHandler(player->GetSession()).SendSysMessage(message);
         }
@@ -108,7 +108,6 @@ public:
                     gossipText = "I would like to remove my instance saves.";
                     message = "Greetings $n. This is an npc that allows you to reset instance ids, allowing you to re-enter, without the need to wait for the reset time to expire. It was developed by the AzerothCore community.";
                     break;
-
                 }
                 case LOCALE_esES:
                 case LOCALE_esMX:
@@ -122,8 +121,9 @@ public:
                     gossipText = "Я бы хотел удалить мои сохраненные подземелья.";
                     message = "Приветствую, $n. Этот персонаж может удалить список посещенных подземелий, позволив Вам повторно их посетить не дожидаясь времени планового перезапуска. Разработан в AzerothCore community.";
                     break;
-
                 }
+                case TOTAL_LOCALES:
+                    break;
             }
             GossipSetText(player, message, DEFAULT_GOSSIP_MESSAGE);
             AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
@@ -178,6 +178,8 @@ public:
                     creatureWhisper = "Ваши подземелья перезагружены.";
                     break;
                 }
+                case TOTAL_LOCALES:
+                    break;
             }
             creature->Whisper(creatureWhisper, LANG_UNIVERSAL, player);
             CloseGossipMenuFor(player);
