@@ -15,7 +15,6 @@ static bool instancereset_normalmodeonly;
 
 void GossipSetText(Player* player, std::string message, uint32 textID)
 {
-    GossipText const* gossip = sObjectMgr->GetGossipText(textID);
     WorldPacket data(SMSG_NPC_TEXT_UPDATE, 100);
     data << textID;
     for (uint8 i = 0; i < MAX_GOSSIP_TEXT_OPTIONS; ++i)
