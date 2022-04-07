@@ -1,4 +1,3 @@
--- NPC TEMPLATE FOR mod-instance-reset
 
 SET
 @Entry      := 300000,
@@ -6,7 +5,6 @@ SET
 @Name       := "Cromi",
 @Title      := "Instance Reset";
 
--- NPC
 DELETE FROM `creature_template` WHERE `entry` = @Entry;
 
 INSERT INTO `creature_template` (`entry`, `modelid1`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `unit_class`, `unit_flags`, `type`, `type_flags`, `RegenHealth`, `flags_extra`, `ScriptName`) VALUES
@@ -14,8 +12,14 @@ INSERT INTO `creature_template` (`entry`, `modelid1`, `name`, `subname`, `IconNa
 
 UPDATE `creature_template` SET `npcflag`=`npcflag`|1 WHERE `entry`=@Entry;
 
-DELETE FROM `creature_template_locale` WHERE `entry`=@Entry AND `locale` IN ('esES', 'esMX');
+DELETE FROM `creature_template_locale` WHERE `entry`=@Entry;
 
 INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `Title`, `VerifiedBuild`) VALUES
 (@Entry, 'esES', @Name, 'Reinicio de instancias', 0),
-(@Entry, 'esMX', @Name, 'Reinicio de instancias', 0);
+(@Entry, 'esMX', @Name, 'Reinicio de instancias', 0),
+(@Entry, 'frFR', @Name, 'Redémarrage des instances', 0),
+(@Entry, 'koKR', @Name, '인스턴스 재시작', 0),
+(@Entry, 'deDE', @Name, 'Neustart der Instanz', 0),
+(@Entry, 'zhCN', @Name, '重新启动实例', 0),
+(@Entry, 'zhTW', @Name, '實例重啟', 0),
+(@entry, 'ruRU', @name, 'Перезапуск подземелий', 0);
