@@ -51,7 +51,6 @@ public:
                 case LOCALE_deDE:
                 case LOCALE_zhCN:
                 case LOCALE_zhTW:
-                case LOCALE_ruRU:
                 {
                     message = "This server is running the |cff4CFF00Instance Reset |rmodule.";
                     break;
@@ -62,6 +61,12 @@ public:
                 {
                     message = "Este servidor está ejecutando el módulo |cff4CFF00Instance reset|r";
                     break;
+                }
+                case LOCALE_ruRU:
+                {
+                    message = "Этот сервер использует модуль |cff4CFF00Перезапуск подземелий|r.";
+                    break;
+
                 }
             }
             ChatHandler(player->GetSession()).SendSysMessage(message);
@@ -99,7 +104,6 @@ public:
                 case LOCALE_deDE:
                 case LOCALE_zhCN:
                 case LOCALE_zhTW:
-                case LOCALE_ruRU:
                 {
                     gossipText = "I would like to remove my instance saves.";
                     message = "Greetings $n. This is an npc that allows you to reset instance ids, allowing you to re-enter, without the need to wait for the reset time to expire. It was developed by the AzerothCore community.";
@@ -112,6 +116,13 @@ public:
                     gossipText = "Me gustaría reiniciar mis ids de instancias.";
                     message = "Saludos $n. Este es un npc que te permite reiniciar los ids de las instancias, permitiéndote volver a entrar, sin la necesidad de esperar a que se cumpla el tiempo para el reinicio. Fue desarrollado por la comunidad de AzerothCore.";
                     break;
+                }
+                case LOCALE_ruRU:
+                {
+                    gossipText = "Я бы хотел удалить мои сохраненные подземелья.";
+                    message = "Приветствую, $n. Этот персонаж может удалить список посещенных подземелий, позволив Вам повторно их посетить не дожидаясь времени планового перезапуска. Разработан в AzerothCore community.";
+                    break;
+
                 }
             }
             GossipSetText(player, message, DEFAULT_GOSSIP_MESSAGE);
@@ -152,7 +163,6 @@ public:
                 case LOCALE_deDE:
                 case LOCALE_zhCN:
                 case LOCALE_zhTW:
-                case LOCALE_ruRU:
                 {
                     creatureWhisper = "Your instances have been reset.";
                     break;
@@ -161,6 +171,11 @@ public:
                 case LOCALE_esMX:
                 {
                     creatureWhisper = "Sus instancias han sido restablecidas.";
+                    break;
+                }
+                case LOCALE_ruRU:
+                {
+                    creatureWhisper = "Ваши подземелья перезагружены.";
                     break;
                 }
             }
