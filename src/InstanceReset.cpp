@@ -40,7 +40,7 @@ public:
 
     void OnLogin(Player* player)
     {
-        if (sConfigMgr->GetOption<bool>("instanceResetAnnouncer.announceEnable", true))
+        if (sConfigMgr->GetOption<bool>("instanceReset.Announcer", true))
         {
             std::string message = "";
             switch (player->GetSession()->GetSessionDbLocaleIndex())
@@ -66,7 +66,7 @@ public:
                     message = "Этот сервер использует модуль |cff4CFF00Перезапуск подземелий|r.";
                     break;
                 }
-                case TOTAL_LOCALES:
+                default:
                     break;
             }
             ChatHandler(player->GetSession()).SendSysMessage(message);
@@ -122,7 +122,7 @@ public:
                     message = "Приветствую, $n. Этот персонаж может удалить список посещенных подземелий, позволив Вам повторно их посетить не дожидаясь времени планового перезапуска. Разработан в AzerothCore community.";
                     break;
                 }
-                case TOTAL_LOCALES:
+                default:
                     break;
             }
             GossipSetText(player, message, DEFAULT_GOSSIP_MESSAGE);
@@ -178,7 +178,7 @@ public:
                     creatureWhisper = "Ваши подземелья перезагружены.";
                     break;
                 }
-                case TOTAL_LOCALES:
+                default:
                     break;
             }
             creature->Whisper(creatureWhisper, LANG_UNIVERSAL, player);

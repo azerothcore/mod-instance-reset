@@ -15,4 +15,4 @@ instanceReset.Enable=true
 
 instanceReset.NormalModeOnly = false
 
-instanceResetAnnouncer.announceEnable = true
+instanceReset.Announcer = true
