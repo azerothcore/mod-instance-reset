@@ -10,9 +10,6 @@
 #include "WorldSession.h"
 #include "Opcodes.h"
 
-static bool instancereset_enable;
-static bool instancereset_normalmodeonly;
-
 void GossipSetText(Player* player, std::string message, uint32 textID)
 {
     WorldPacket data(SMSG_NPC_TEXT_UPDATE, 100);
@@ -74,17 +71,6 @@ public:
     }
 };
 
-class instanceResetConfigLoad : public WorldScript {
-public:
-
-    instanceResetConfigLoad() : WorldScript("instanceResetConfigLoad") { }
-
-    void OnBeforeConfigLoad(bool /*reload*/) override {
-        instancereset_enable = sConfigMgr->GetOption<bool>("instanceReset.Enable", 1);
-        instancereset_normalmodeonly = sConfigMgr->GetOption<bool>("instanceReset.NormalModeOnly", 0);
-    }
-};
-
 class instanceReset : public CreatureScript
 {
 public:
@@ -92,7 +78,7 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (instancereset_enable) {
+        if (sConfigMgr->GetOption<bool>("instanceReset.Enable", true)) {
             ClearGossipMenuFor(player);
             std::string gossipText = "";
             std::string message = "";
@@ -138,7 +124,7 @@ public:
         uint32 diff = 2;
         if (action == GOSSIP_ACTION_INFO_DEF + 1)
         {
-            if (!instancereset_normalmodeonly)
+            if (!(sConfigMgr->GetOption<bool>("instanceReset.NormalModeOnly", true)))
                 diff = MAX_DIFFICULTY;
             for (uint8 i = 0; i < diff; ++i)
             {
@@ -189,7 +175,6 @@ public:
 };
 
 void AddInstanceResetScripts() {
-    new instanceResetConfigLoad();
     new instanceReset();
     new InstanceResetAnnouncer();
 }

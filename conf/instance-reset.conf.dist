@@ -15,4 +15,10 @@ instanceReset.Enable=true
 
 instanceReset.NormalModeOnly = false
 
+#############
+#
+# If true, announces the module to the player.
+# default: true
+#
+
 instanceReset.Announcer = true
