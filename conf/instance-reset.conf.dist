@@ -5,7 +5,7 @@
 # default: true
 #
 
-instanceReset.Enable=true
+instanceReset.Enable = true
 
 #############
 #

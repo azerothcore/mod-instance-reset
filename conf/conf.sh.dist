@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-
-DB_WORLD_CUSTOM_PATHS+=( $MOD_INSTANCE_RESET_ROOT"/sql/world/base/" )
