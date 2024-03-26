@@ -98,9 +98,58 @@ bool InstanceReset::OnGossipHello(Player* player, Creature* creature)
             break;
     }
 
-    if (sConfigMgr->GetOption<bool>("instanceReset.Enable", true))
+    if (enable)
     {
-        AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+        switch (transactionType)
+        {
+            case 0:
+            {
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+                break;
+            }
+
+            case 1:
+            {
+                if (player->HasItemCount(token, count, true))
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+                }
+                else
+                {
+                    creature->Whisper("You do not have the required items or token.", LANG_UNIVERSAL, player);
+                }
+                break;
+            }
+
+            case 2:
+            {
+                if (player->GetMoney() >= money)
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+                }
+                else
+                {
+                    creature->Whisper("You don't have enough money.", LANG_UNIVERSAL, player);
+                }
+                break;
+            }
+
+            case 3:
+            {
+                if ((player->HasItemCount(token, count, true)) && ((player->GetMoney() >= money)))
+                {
+                    AddGossipItemFor(player, GOSSIP_ICON_CHAT, gossipText, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+                }
+                else
+                {
+                    creature->Whisper("The reset requires a token and money.", LANG_UNIVERSAL, player);
+                }
+                break;
+            }
+
+            default:
+                break;
+        }
     }
 
     GossipSetText(player, message, DEFAULT_GOSSIP_MESSAGE);
@@ -163,8 +212,45 @@ bool InstanceReset::OnGossipSelect(Player* player, Creature* creature, uint32 /*
         }
 
         creature->Whisper(creatureWhisper, LANG_UNIVERSAL, player);
+
+        switch (transactionType)
+        {
+            case 0: break;
+
+            case 1:
+            {
+                player->DestroyItemCount(token, count, true);
+                break;
+            }
+
+            case 2:
+            {
+                player->ModifyMoney(-money);
+                break;
+            }
+
+            case 3:
+            {
+                player->DestroyItemCount(token, count, true);
+                player->ModifyMoney(-money);
+                break;
+            }
+
+            default:
+                break;
+        }
+
         CloseGossipMenuFor(player);
     }
 
     return true;
+}
+
+void InstanceResetWorldConfig::OnBeforeConfigLoad(bool /*reload*/)
+{
+    enable = sConfigMgr->GetOption<bool>("instanceReset.Enable", true);
+    transactionType = sConfigMgr->GetOption<uint32>("instanceReset.TransactionType", 0);
+    token = sConfigMgr->GetOption<uint32>("instanceReset.TokenID", 49426);
+    count = sConfigMgr->GetOption<uint16>("instanceReset.TokenCount", 26);
+    money = sConfigMgr->GetOption<uint32>("instanceReset.MoneyCount", 10000000);
 }
