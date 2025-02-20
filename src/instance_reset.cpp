@@ -25,7 +25,7 @@ void GossipSetText(Player* player, std::string message, uint32 textID)
     player->GetSession()->SendPacket(&data);
 }
 
-void InstanceResetAnnouncer::OnLogin(Player* player)
+void InstanceResetAnnouncer::OnPlayerLogin(Player* player)
 {
     if (sConfigMgr->GetOption<bool>("instanceReset.Announcer", true))
     {

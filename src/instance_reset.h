@@ -22,7 +22,7 @@ class InstanceResetAnnouncer : public PlayerScript
 public:
     InstanceResetAnnouncer() : PlayerScript("InstanceResetAnnouncer") {}
 
-    void OnLogin(Player* player) override;
+    void OnPlayerLogin(Player* player) override;
 };
 
 class InstanceReset : public CreatureScript
